@@ -8,6 +8,6 @@ RUN /root/ssl/install.sh
 ADD postfix/* /etc/postfix/
 ADD start.sh /
 
-EXPOSE 25 465
+EXPOSE 25
 
 CMD ["/bin/bash", "-c", "set -e && /start.sh"]

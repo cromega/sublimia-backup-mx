@@ -5,7 +5,7 @@ postfix -c /etc/postfix start
 sleep 5
 
 while true; do
-  nc -z localhost 465
+  nc -z localhost 25
   ret=$?
   if [ $ret -eq 0 ]; then
     sleep 30
