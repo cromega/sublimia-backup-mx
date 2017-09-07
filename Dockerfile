@@ -2,8 +2,9 @@ FROM alpine
 
 RUN apk update && apk add bash openssl postfix
 
-ADD ssl/star.sublimia.nl.pem /etc/ssl/private/
-ADD ssl/STAR_sublimia_nl.ca-bundle.pem /etc/ssl/certs/
+ADD ssl/ /root/ssl
+RUN /root/ssl/install.sh
+
 ADD postfix/* /etc/postfix/
 ADD start.sh /
 
