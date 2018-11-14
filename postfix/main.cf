@@ -12,8 +12,8 @@ append_dot_mydomain = no
 readme_directory = no
 
 # TLS parameters
-smtpd_tls_cert_file=/etc/ssl/private/star.sublimia.nl.pem
-smtpd_tls_CAfile=/etc/ssl/certs/STAR_sublimia_nl.ca-bundle.pem
+smtpd_tls_cert_file=/postfix.pem
+smtpd_tls_CAfile=/postfix-bundle.pem
 smtpd_tls_security_level=may
 smtp_tls_security_level=encrypt
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache

@@ -1,3 +1,0 @@
-[submodule "ssl"]
-	path = certs
-	url = git@bitbucket.org:cromega/sublimia-certs.git
