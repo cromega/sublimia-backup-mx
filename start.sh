@@ -1,8 +1,14 @@
-#!/bin/bash
+#!/bin/bash -e
 
+tail_logs() {
+  tail -f /var/log/maillog
+}
+
+rsyslogd
 postfix -c /etc/postfix start
 
-sleep 5
+sleep 3
+tail_logs &
 
 while true; do
   nc -z localhost 25
