@@ -14,10 +14,8 @@ readme_directory = no
 # TLS parameters
 smtpd_tls_cert_file=/etc/ssl/private/star.sublimia.nl.pem
 smtpd_tls_CAfile=/etc/ssl/certs/STAR_sublimia_nl.ca-bundle.pem
-#smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 smtpd_tls_security_level=may
 smtp_tls_security_level=encrypt
-smtp_tls_wrappermode=yes
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
