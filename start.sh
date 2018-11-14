@@ -4,6 +4,9 @@ tail_logs() {
   tail -f /var/log/maillog
 }
 
+echo $SSL_CERT | base64 -d > /postfix.pem
+echo $SSL_BUNDLE | base64 -d > /postfix-bundle.pem
+
 rsyslogd
 postfix -c /etc/postfix start
 

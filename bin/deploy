@@ -1,0 +1,18 @@
+#!/bin/bash -e
+
+APP=sublimia-backup-mx
+IP=169.197.100.250
+
+if hyper ps | grep -q $APP; then
+  hyper kill $APP
+  sleep 1
+  hyper rm $APP
+fi
+
+hyper run -d --restart=always --size=s1 --name=sublimia-backup-mx \
+  -p 25:25 \
+  -e "SSL_CERT=$(cat ../sublimia-platform/certs/star.sublimia.nl.key.pem ../sublimia-platform/certs/star.sublimia.nl.pem | base64)" \
+  -e "SSL_BUNDLE=$(cat ../sublimia-platform/certs/star.sublimia.nl.bundle.pem | base64)" \
+  cromega/sublimia-backup-mx
+
+hyper fip attach $IP $APP
