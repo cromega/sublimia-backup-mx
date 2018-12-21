@@ -1,0 +1,45 @@
+resource_types:
+- name: hyper-sh-container
+  type: docker-image
+  source:
+    repository: cromega/hyper-sh-resource
+    tag: latest
+
+resources:
+- name: code
+  type: git
+  source:
+    uri: git@github.com:cromega/sublimia-backup-mx
+    private_key: {{deploy-key}}
+- name: docker-image
+  type: docker-image
+  source:
+    repository: cromega/sublimia-backup-mx
+    username: cromega
+    password: {{dockerhub-password}}
+- name: hyper-sh
+  type: hyper-sh-container
+  source:
+    accesskey: {{hyper-sh-access-key}}
+    secretkey: {{hyper-sh-secret-key}}
+    region: eu-central-1
+
+jobs:
+- name: docker-image
+  plan:
+  - get: code
+    trigger: true
+  - put: docker-image
+    params:
+      build: code/
+- name: deploy
+  plan:
+  - get: code
+    trigger: true
+    passed: [docker-image]
+  - put: hyper-sh
+    params:
+      name: sublimia-backup-mx
+      size: s1
+      image: cromega/sublimia-backup-mx
+      public_ip: 169.197.100.250
